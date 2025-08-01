@@ -71,6 +71,12 @@ export default {
 					diamond: '#87CEEB',
 					emerald: '#50C878',
 					redstone: '#DC143C'
+				},
+				landing: {
+					bg: 'hsl(var(--landing-bg))',
+					primary: 'hsl(var(--landing-primary))',
+					secondary: 'hsl(var(--landing-secondary))',
+					text: 'hsl(var(--landing-text))'
 				}
 			},
 			borderRadius: {

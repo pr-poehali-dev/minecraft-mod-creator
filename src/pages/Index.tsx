@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState('home');
+  const [currentView, setCurrentView] = useState('landing');
 
   const tutorials = [
     {
@@ -17,18 +16,25 @@ const Index = () => {
       icon: 'BookOpen'
     },
     {
-      title: 'Добавление предметов',
-      description: 'Создайте уникальные предметы, инструменты и оружие',
+      title: 'Хардвар и оборудование',
+      description: 'Создание компьютеров, машин и технических устройств',
       difficulty: 'Средний',
-      time: '45 мин',
-      icon: 'Sword'
+      time: '60 мин',
+      icon: 'Cpu'
     },
     {
-      title: 'Мобы и существа',
-      description: 'Программирование поведения и анимации новых мобов',
-      difficulty: 'Продвинутый',
-      time: '90 мин',
-      icon: 'Zap'
+      title: 'Дизайн скинов',
+      description: 'Создание уникальных скинов для персонажей',
+      difficulty: 'Новичок',
+      time: '45 мин',
+      icon: 'Palette'
+    },
+    {
+      title: 'Строительство домов',
+      description: 'Архитектура и дизайн красивых построек',
+      difficulty: 'Средний',
+      time: '75 мин',
+      icon: 'Home'
     }
   ];
 
@@ -41,75 +47,150 @@ const Index = () => {
       icon: 'Home'
     },
     {
-      title: 'Транспорт и машины',
-      description: 'Автомобили, самолёты, поезда для Minecraft',
-      category: 'Транспорт',
+      title: 'Компьютерный хардвар',
+      description: 'Процессоры, мониторы, серверы для игры',
+      category: 'Техника',
       downloads: '8.7k',
-      icon: 'Car'
+      icon: 'Cpu'
     },
     {
-      title: 'Магические предметы',
-      description: 'Волшебные палочки, зелья, артефакты',
-      category: 'Магия',
+      title: 'Коллекция скинов',
+      description: 'Рыцари, маги, современные персонажи',
+      category: 'Скины',
       downloads: '15.1k',
-      icon: 'Sparkles'
+      icon: 'Palette'
     },
     {
-      title: 'Новые биомы',
-      description: 'Кристальные пещеры, вулканические земли',
-      category: 'Мир',
+      title: 'Проекты домов',
+      description: 'Средневековые замки, современные виллы',
+      category: 'Строительство',
       downloads: '9.2k',
-      icon: 'Mountain'
+      icon: 'Building'
     }
   ];
 
   const features = [
     {
-      title: 'Визуальный редактор',
-      description: 'Создавайте моды без программирования',
-      icon: 'Code'
+      title: 'Создать мод',
+      description: 'Разработка модификаций для игры',
+      icon: 'Code',
+      action: () => setCurrentView('main')
     },
     {
-      title: 'Готовые шаблоны',
-      description: 'Библиотека проверенных модов',
-      icon: 'Template'
+      title: 'Создать хардвар',
+      description: 'Проектирование игрового оборудования',
+      icon: 'Cpu',
+      action: () => setCurrentView('main')
     },
     {
-      title: 'Обучение',
-      description: 'Пошаговые туториалы от А до Я',
-      icon: 'GraduationCap'
+      title: 'Создать скин',
+      description: 'Дизайн персонажей и внешнего вида',
+      icon: 'Palette',
+      action: () => setCurrentView('main')
+    },
+    {
+      title: 'Обучение домам',
+      description: 'Туториалы по строительству домов',
+      icon: 'Home',
+      action: () => setCurrentView('main')
     }
   ];
 
-  const Navigation = () => (
-    <nav className="bg-minecraft-dirt/20 backdrop-blur-sm border-b-4 border-minecraft-dirt sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-minecraft-grass rounded-sm"></div>
-            <h1 className="text-2xl font-bold text-minecraft-dirt">Minecraft.mods</h1>
-          </div>
-          <div className="hidden md:flex space-x-6">
-            {['Главная', 'Обучение', 'Редактор', 'Шаблоны', 'Галерея', 'Сообщество'].map((item) => (
-              <button
-                key={item}
-                className="px-4 py-2 rounded-md hover:bg-minecraft-grass/20 transition-colors text-minecraft-dirt font-medium"
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-          <Button className="bg-minecraft-grass hover:bg-minecraft-emerald text-white">
-            Войти
+  const LandingPage = () => (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500 rounded-lg rotate-45 animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-indigo-400 rounded-lg rotate-12 animate-bounce"></div>
+        <div className="absolute bottom-32 left-32 w-20 h-20 bg-cyan-500 rounded-lg -rotate-12 animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-28 h-28 bg-blue-600 rounded-lg rotate-45 animate-bounce"></div>
+      </div>
+      
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+            Добро пожаловать
+          </h1>
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white">
+            Minecraft.mods
+          </h2>
+          <p className="text-xl md:text-2xl text-blue-200 mb-12 max-w-3xl mx-auto">
+            Платформа для создания модов, хардвара, скинов и обучения строительству в Minecraft
+          </p>
+          
+          <Button 
+            size="lg" 
+            onClick={() => setCurrentView('main')}
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-12 py-6 text-xl rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+          >
+            <Icon name="Rocket" className="mr-3" size={24} />
+            Начать
           </Button>
         </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mt-16">
+          {features.map((feature, index) => (
+            <Card 
+              key={index} 
+              className="bg-slate-800/60 border-slate-600/50 hover:bg-slate-700/60 transition-all duration-300 cursor-pointer transform hover:scale-105 backdrop-blur-sm"
+              onClick={feature.action}
+            >
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Icon name={feature.icon as any} className="text-white" size={32} />
+                </div>
+                <CardTitle className="text-white text-lg">{feature.title}</CardTitle>
+                <CardDescription className="text-blue-200">{feature.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+        
+        <div className="mt-16 text-center">
+          <p className="text-blue-300 text-lg">
+            Более 50,000 разработчиков уже создают удивительные проекты
+          </p>
+        </div>
       </div>
-    </nav>
+    </div>
   );
-
-  return (
+  
+  const MainSite = () => (
     <div className="min-h-screen bg-gradient-to-b from-minecraft-diamond/30 to-background">
-      <Navigation />
+      <nav className="bg-minecraft-dirt/20 backdrop-blur-sm border-b-4 border-minecraft-dirt sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-minecraft-grass rounded-sm"></div>
+              <h1 className="text-2xl font-bold text-minecraft-dirt">Minecraft.mods</h1>
+            </div>
+            <div className="hidden md:flex space-x-6">
+              {['Главная', 'Создать мод', 'Создать хардвар', 'Создать скин', 'Обучение домам', 'Галерея', 'Сообщество'].map((item) => (
+                <button
+                  key={item}
+                  className="px-4 py-2 rounded-md hover:bg-minecraft-grass/20 transition-colors text-minecraft-dirt font-medium"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setCurrentView('landing')}
+                className="border-minecraft-dirt text-minecraft-dirt"
+              >
+                <Icon name="ArrowLeft" size={16} className="mr-1" />
+                Назад
+              </Button>
+              <Button className="bg-minecraft-grass hover:bg-minecraft-emerald text-white">
+                Войти
+              </Button>
+            </div>
+          </div>
+        </div>
+      </nav>
       
       {/* Hero Section */}
       <section className="py-20 px-4">
@@ -119,12 +200,12 @@ const Index = () => {
               <Icon name="Blocks" size={64} className="text-minecraft-grass" />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-minecraft-dirt">
-              Создавай моды для
+              Создавай для
               <span className="block text-minecraft-grass">Minecraft</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Изучай программирование, используй готовые шаблоны и создавай уникальные моды 
-              с помощью нашего визуального редактора
+              Создавай моды, хардвар, скины и изучай строительство домов 
+              с помощью наших инструментов и туториалов
             </p>
           </div>
           
@@ -139,9 +220,9 @@ const Index = () => {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {features.map((feature, index) => (
-              <Card key={index} className="border-minecraft-stone/20 hover:border-minecraft-grass/40 transition-colors">
+              <Card key={index} className="border-minecraft-stone/20 hover:border-minecraft-grass/40 transition-colors cursor-pointer" onClick={feature.action}>
                 <CardHeader className="text-center">
                   <div className="w-12 h-12 bg-minecraft-grass/20 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <Icon name={feature.icon as any} className="text-minecraft-grass" />
@@ -159,11 +240,11 @@ const Index = () => {
       <section className="py-16 px-4 bg-white/50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-minecraft-dirt mb-4">Обучающие туториалы</h2>
-            <p className="text-xl text-muted-foreground">Пошаговые гайды от создания первого блока до сложных механик</p>
+            <h2 className="text-4xl font-bold text-minecraft-dirt mb-4">Обучающие материалы</h2>
+            <p className="text-xl text-muted-foreground">Пошаговые гайды по модингу, хардвару, скинам и строительству</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {tutorials.map((tutorial, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow border-minecraft-stone/20">
                 <CardHeader>
@@ -319,7 +400,7 @@ const Index = () => {
                 <h3 className="text-xl font-bold text-minecraft-dirt">Minecraft.mods</h3>
               </div>
               <p className="text-muted-foreground">
-                Платформа для изучения и создания модов для Minecraft
+                Платформа для создания модов, хардвара, скинов и обучения строительству
               </p>
             </div>
             
@@ -360,6 +441,12 @@ const Index = () => {
       </footer>
     </div>
   );
+  
+  if (currentView === 'landing') {
+    return <LandingPage />;
+  }
+  
+  return <MainSite />;
 };
 
 export default Index;
